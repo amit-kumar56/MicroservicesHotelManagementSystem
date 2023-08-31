@@ -1,0 +1,17 @@
+pipeline {
+    agent any
+    stages {
+        stage('clone') {
+            steps {
+                sh 'rm -rf *'
+                sh 'git clone -b master https://github.com/amit-kumar56/MicroservicesHotelManagementSystem.git'
+                sh 'mvn clean -f MicroservicesHotelManagementSystem/ApiGateway'
+            }
+        }
+         stage('deploy') {
+            steps {
+                sh 'mvn package -f MicroservicesHotelManagementSystem/ApiGateway'
+            }
+        }
+    }
+}
